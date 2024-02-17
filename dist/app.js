@@ -59,7 +59,7 @@ function createIngredientHTML(category, ingredient, amount, dateAdded) {
 }
 // Function to display recipe in HTML
 function displayRecipe(recipe) {
-    var recipeHTML = '<table style="width: 100%"><thead><th>Type</th><th>Name</th><th>Amount</th><th>Date Added</th></thead><tbody>';
+    var recipeHTML = '<table><thead><th>Type</th><th>Name</th><th>Amount</th><th>Date Added</th></thead><tbody>';
     for (var category in recipe) {
         for (var ingredient in recipe[category]) {
             var amount = recipe[category][ingredient].amount;

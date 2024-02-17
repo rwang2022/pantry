@@ -113,3 +113,11 @@ nav a {
     font-size: 25px;
     font-family: 'DM Serif Display', serif;
 }
+
+table, tr, th {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+table {
+    width: 100%;
+}
