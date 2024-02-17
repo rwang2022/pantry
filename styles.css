@@ -1,5 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Barriecito&family=Kalam:wght@300;400;700&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&family=Satisfy&display=swap');
+
 h1 {
-    font-size: 45pt;
+    font-family: "Barriecito", system-ui;
+    ;
+    font-size: 55pt;
+}
+
+h2 {
+    font-family: "Red Hat Display", sans-serif;
+    font-size: 20pt;
+}
+
+body {
+    background-color: #c8d8c7;
+
+}
+
+input[type=text],
+input[type=number] {
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    width: 250px;
+    height: 30px;
+    padding-left: 10px;
+}
+
+input[type=text],
+input[type=number]:focus {
+    outline: none;
+    border: 1px solid #a0d18c;
+    color: #3a3838;
 }
 
 .top-left {
@@ -58,10 +91,11 @@ nav {
     display: flex;
     justify-content: space-between;
 
+
 }
 
 nav :hover {
-    background-color: #714d49;
+    background-color: #304a36;
 }
 
 nav a {
@@ -73,6 +107,9 @@ nav a {
     text-decoration: none;
     width: 100%;
     box-sizing: border-box;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
     font-size: 25px;
     font-family: 'DM Serif Display', serif;
 }
