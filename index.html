@@ -2,32 +2,47 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="/styles.css">
-    <link rel="icon" href="/images/logo.svg" type="icon">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="images/logo.svg" type="icon" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pantry App</title>
     <script src="/dist/app.js"></script>
 </head>
 
 <body>
-    <h1>Pantry App</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html">About Us</a>
+        <a href="index.html">Recipes</a>
+        <a href="index.html">Pantry</a>
+        <a href="index.html"> Shopping List </a>
+    </nav>
 
-    <input type="text" id="name" placeholder="name">
-
-    <label for="type">type: </label>
-    <select id="type">
-        <option value="spices">spices</option>
-        <option value="fruits">fruits</option>
-        <option value="veggies">veggies</option>
-        <option value="meat">meat</option>
-    </select>
-
-    <input type="number" id="amount" placeholder="amount">
-    <button onclick="addIngredient()">Add Ingredient</button>
-    <br>
-    <button onclick="showPantry()">Show Pantry</button>
-    <div id="pantry-list"></div>
+    <div class="grid-container">
+        <div class="grid-item"></div>
+        <div class="grid-item">
+            <h1>Let Me Cook!!</h1>
+        </div>
+        <div class="grid-item">
+            <a href="index.html"><img src="images/page-turning.gif" alt="button" width="65%" /></a>
+        </div>
+    </div>
+    <br />
+    <div class="align-center" class="container">
+        <input type="text" id="name" placeholder="name" />
+        <input type="text" id="type" placeholder="type" />
+        <input type="number" id="amount" placeholder="1" />
+        <h2></h2>
+        <button onclick="addIngredient()">
+            Add Ingredient
+        </button>
+        <br />
+        <button onclick="showPantry()">
+            Show Pantry
+        </button>
+        <div id="pantry-list"></div>
+    </div>
 </body>
 
 </html>
