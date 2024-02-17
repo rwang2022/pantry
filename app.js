@@ -18,11 +18,14 @@ function addIngredient() {
     var amount = document.getElementById("amount").value;
 
     var x = new ingredient(name, type, amount); 
+    console.log("added " + x.toString());
     pantry.push(x);
 }
 
 function showPantry() {
+    var pantry_list = document.getElementById("pantry-list");
+    pantry_list.innerHTML = "";
     for (let i = 0; i < pantry.length; i++) {
-        console.log(pantry[i].toString());
+        pantry_list.innerHTML += "<p>" + pantry[i].toString() + "</p>";
     }
 }
