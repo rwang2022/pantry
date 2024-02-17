@@ -1,15 +1,28 @@
-var pantry = {}
+class ingredient {
+    constructor(name, type, amount) {
+        this.name = name;
+        this.type = type;
+        this.amount = amount;
+    }
+
+    toString() {
+        return `name: ${this.name}, type: ${this.type}, amount: ${this.amount}`;
+    }
+}
+
+var pantry = []
 
 function addIngredient() {
-    var ingredient = document.getElementById("ingredient").value;
+    var name = document.getElementById("name").value;
+    var type = document.getElementById("type").value;
     var amount = document.getElementById("amount").value;
 
-    console.log("ingredient: " + ingredient);
-    console.log("amount: " + amount);
-
-    pantry[ingredient] = amount;
+    var x = new ingredient(name, type, amount); 
+    pantry.push(x);
 }
 
 function showPantry() {
-    console.log(JSON.stringify(pantry));
+    for (let i = 0; i < pantry.length; i++) {
+        console.log(pantry[i].toString());
+    }
 }
