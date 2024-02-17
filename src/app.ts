@@ -58,5 +58,34 @@ function addIngredient() {
 }
 
 function showPantry() {
+    displayRecipe(pantry);
     console.log(pantry);
+}
+
+// Function to create HTML for ingredients
+function createIngredientHTML(category, ingredient, amount, dateAdded) {
+    return `
+        <tr class="ingredient">
+            <th class="category">${category}</th>
+            <th class="name">${ingredient}</th>
+            <th class="amount">${amount}</th>
+            <th class="expiry">${dateAdded.toLocaleString('en-US', {timeZone: 'EST'})}</th>
+        </tr>
+    `;
+}
+
+// Function to display recipe in HTML
+function displayRecipe(recipe) {
+    var recipeHTML = '<table style="width: 100%"><thead><th>Type</th><th>Name</th><th>Amount</th><th>Date Added</th></thead><tbody>';
+    for (var category in recipe) {
+        for (var ingredient in recipe[category]) {
+            var amount = recipe[category][ingredient].amount;
+            var dateAdded = recipe[category][ingredient].dateAdded;
+            recipeHTML += createIngredientHTML(category, ingredient, amount, dateAdded);
+        }
+    }
+    recipeHTML += '</tbody></table>';
+
+    (document.getElementById('pantry-list') as HTMLElement).innerHTML = "";
+    (document.getElementById('pantry-list') as HTMLElement).innerHTML = recipeHTML;
 }
