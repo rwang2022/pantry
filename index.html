@@ -4,13 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pantry App</title>
-    <script src="/app.js"></script>
+    <script src="/dist/app.js"></script>
 </head>
 <body>
     <h1>Pantry App</h1>
+
     <input type="text" id="name" placeholder="name">
-    <input type="text" id="type" placeholder="type">
-    <input type="number" id="amount" placeholder="1">
+
+    <label for="type">type: </label>
+    <select id="type">
+        <option value="spices">spices</option>
+        <option value="fruits">fruits</option>
+        <option value="veggies">veggies</option>
+        <option value="meat">meat</option>
+    </select>
+      
+    <input type="number" id="amount" placeholder="amount">
     <button onclick="addIngredient()">Add Ingredient</button>
     <br>
     <button onclick="showPantry()">Show Pantry</button>
