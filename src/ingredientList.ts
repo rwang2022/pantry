@@ -11,6 +11,11 @@ class ingredientList {
         })
     }
 
+    hasIngredient(ingredient: string, quantity: number): boolean {
+        if (this.ingredients[ingredient] === undefined) return false;
+        return (this.ingredients[ingredient] >= quantity);
+    }
+
     addIngredient(ingredient: string, quantity: number): void {
         if (this.ingredients[ingredient]) this.ingredients[ingredient] += quantity;
         else this.ingredients[ingredient] = quantity;
@@ -55,8 +60,9 @@ class ingredientList {
 }
 
 let pantry1: ingredientList = new ingredientList({ "a": 1, "b": 2 });
+console.log(pantry1.ingredients["a"]);
 
-let recipes1: ingredientList[];
+let recipes1: ingredientList[] = [];
 recipes1.push(new ingredientList({ "a": 1, "b": 2 }));
 recipes1.push(new ingredientList({ "b": 1, "c": 2 }));
 
@@ -69,14 +75,15 @@ function addIngredientToPantry() {
     const amountAdd: number = parseInt((document.getElementById("amount") as HTMLInputElement).value);
     if (amountAdd > 0) pantry1.addIngredient(ingredient1, amountAdd);
     else if (amountAdd < 0) pantry1.removeIngredient(ingredient1, -amountAdd);
-    else {}
+    else { }
     showPantry();
 }
 
 function displayRecipes() {
+    console.log(recipes1.length);
     (document.getElementById("pantry-list") as HTMLElement).innerHTML = "";
-    for (let i = 0; i < recipes.length; i++) {
-        (document.getElementById('pantry-list') as HTMLElement).innerHTML += `<h2 style="text-align: center">${recipe_names[i]}</h2>`
+    for (let i = 0; i < recipes1.length; i++) {
+        (document.getElementById('pantry-list') as HTMLElement).innerHTML += `<h2 style="text-align: center">Recipe #${i + 1}</h2>`
         displayIngredientList(recipes1[i]);
     }
 }
@@ -85,14 +92,25 @@ function displayRecipes() {
 function displayIngredientList(ingredientList: ingredientList) {
     var listHTML = '<table><thead><th>Name</th><th>Amount</th></thead><tbody>';
     Object.entries(ingredientList.ingredients).forEach(([ingredient, amount]) => {
-        listHTML += `
-            <tr class="ingredient">
-                <th class="ingredient">${ingredient}</th>
-                <th class="amount">${amount}</th>
-            </tr>`;
+        console.log(ingredient, amount);
+        console.log(pantry1.ingredients[ingredient]);
+        if (ingredientList !== pantry1 && pantry1.hasIngredient(ingredient, amount)) {
+            console.log("pantry has ingredient!");
+            listHTML += 
+                `<tr class="ingredient" style="background-color: coral";>
+                    <th class="ingredient">${ingredient}</th>
+                    <th class="amount">${amount}</th>        
+                </tr>`
+        }
+        else {
+            listHTML +=
+                `<tr class="ingredient">
+                    <th class="ingredient">${ingredient}</th>
+                    <th class="amount">${amount}</th>
+                </tr>`;
+        }
     })
     listHTML += '</tbody></table>';
 
-    (document.getElementById('pantry-list') as HTMLElement).innerHTML = "";
     (document.getElementById('pantry-list') as HTMLElement).innerHTML += listHTML;
 }
