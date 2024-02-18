@@ -84,11 +84,14 @@ function addIngredient() {
 
     if (pantry[type][name] !== undefined) {
         pantry[type][name].amount += amountAdd;
+        if (pantry[type][name].amount <= 0) delete pantry[type][name];
     }
     else {
         const now: Date = new Date(Date.now());
         pantry[type][name] = new ingredient(amountAdd, now);
     }
+
+    showPantry();
 }
 
 function showPantry() {
