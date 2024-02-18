@@ -65,7 +65,11 @@ function showPantry() {
 function addIngredientToPantry() {
     var ingredient1 = document.getElementById("name").value;
     var amountAdd = parseInt(document.getElementById("amount").value);
-    pantry1.addIngredient(ingredient1, amountAdd);
+    if (amountAdd > 0)
+        pantry1.addIngredient(ingredient1, amountAdd);
+    else if (amountAdd < 0)
+        pantry1.removeIngredient(ingredient1, -amountAdd);
+    else { }
     showPantry();
 }
 function displayRecipes() {
