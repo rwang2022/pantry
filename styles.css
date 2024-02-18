@@ -2,7 +2,6 @@
 
 h1 {
     font-family: "Barriecito", system-ui;
-    ;
     font-size: 55pt;
 }
 
@@ -12,27 +11,22 @@ h2 {
 }
 
 body {
-    background-color: #c8d8c7;
+    background-color: rgb(221, 232, 224);
 
 }
 
 input[type=text],
-input[type=number] {
+input[type=number],
+select {
+    font-family: 'Red Hat Display';
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 20px;
     border: 1px solid #ffffff;
-    color: #ffffff;
+    color: #6b6b6b;
     width: 250px;
     height: 30px;
     padding-left: 10px;
-}
-
-input[type=text],
-input[type=number]:focus {
-    outline: none;
-    border: 1px solid #a0d18c;
-    color: #3a3838;
 }
 
 .top-left {
@@ -86,16 +80,17 @@ input[type=number]:focus {
 }
 
 nav {
-    background-color: #5d835b;
+    background-color: rgb(143, 183, 149);
     overflow: hidden;
     display: flex;
     justify-content: space-between;
+    font-family: 'Kalam';
 
 
 }
 
 nav :hover {
-    background-color: #304a36;
+    background-color: rgb(104, 140, 104);
 }
 
 nav a {
@@ -111,13 +106,51 @@ nav a {
     -moz-border-radius: 2px;
     border-radius: 2px;
     font-size: 25px;
-    font-family: 'DM Serif Display', serif;
+    
 }
 
-table, tr, th {
+table,
+tr,
+th {
     border: 1px solid black;
     border-collapse: collapse;
 }
+
 table {
     width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: 'Red Hat Display';
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+
+}
+
+thead tr {
+    background-color: #cbb3f3;
+    color: #ffffff;
+    text-align: left;
+}
+
+th,
+td {
+    padding: 12px 15px;
+}
+
+tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+tbody tr.active-row {
+    font-weight: bold;
+
 }

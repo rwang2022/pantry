@@ -70,7 +70,7 @@ function makeRecipe(recipe): Boolean {
             pantry[type][ingredientName].amount -= ingredient.amount;
         }
     }
-    
+
     return true;
 }
 
@@ -78,6 +78,9 @@ function addIngredient() {
     const name: string = (document.getElementById("name") as HTMLInputElement).value;
     const type: string = (document.getElementById("type") as HTMLInputElement).value;
     const amountAdd: number = parseInt((document.getElementById("amount") as HTMLInputElement).value);
+
+    console.log(name, type, amountAdd);
+    
 
     if (pantry[type][name] !== undefined) {
         pantry[type][name].amount += amountAdd;

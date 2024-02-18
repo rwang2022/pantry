@@ -75,6 +75,7 @@ function addIngredient() {
     var name = document.getElementById("name").value;
     var type = document.getElementById("type").value;
     var amountAdd = parseInt(document.getElementById("amount").value);
+    console.log(name, type, amountAdd);
     if (pantry[type][name] !== undefined) {
         pantry[type][name].amount += amountAdd;
     }

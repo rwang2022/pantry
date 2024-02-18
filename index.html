@@ -1,53 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" href="images/logo.svg" type="icon" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pantry App</title>
-    <script src="/dist/app.js"></script>
-  </head>
 
-  <body>
-    <!--Nav Bar-->
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="index.html">About Us</a>
-      <a href="index.html">Recipes</a>
-      <a href="index.html">Pantry</a>
-      <a href="index.html"> Shopping List </a>
-    </nav>
+<head>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="images/logo.svg" type="icon" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pantry App</title>
+  <script src="/dist/app.js"></script>
+</head>
 
-    <!--Title-->
-    <div class="grid-container">
-      <div class="grid-item"></div>
-      <div class="grid-item">
-        <h1 style="color: rgb(72, 100, 75) ">Let Me Cook!!</h1>
-      </div>
-      <div class="grid-item">
-        <a href="index.html"
-          ><img src="images/page-turning.gif" alt="button" width="75%"
-        /></a>
-      </div>
+<body>
+  <!--Nav Bar-->
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="index.html">About Us</a>
+    <a href="index.html">Recipes</a>
+    <a href="index.html">Pantry</a>
+    <a href="index.html"> Shopping List </a>
+  </nav>
+
+  <!--Title-->
+  <div class="grid-container">
+    <div class="grid-item">
+      <img src="images/whisk.gif" width=75%>
     </div>
-    <br />
-    <div class="align-center">
-      <h2>Add an ingredient to your pantry</h2>
+    <div class="grid-item">
+      <h1 style="color: rgb(244, 142, 164) ">Let Me Cook!!
+      </h1>
     </div>
+    <div class="grid-item">
+      <img src="images/page-turning.gif" width=70%>
 
-    <!--Input Ingredients-->
-    <div class="align-center">
-      <input type="text" id="name" placeholder="name" />
-      <input type="text" id="type" placeholder="type" />
-      <input type="number" id="amount" placeholder="amount" />
-
-      <div>
-        <button onclick="addIngredient()">Add Ingredient</button>
-        <br />
-        <button onclick="showPantry()">Show Pantry</button>
-        <div id="pantry-list"></div>
-      </div>
     </div>
-  </body>
+    <br>
+  </div>
+
+
+  <!--Input Ingredients-->
+  <div class="align-center">
+    <input type="text" id="name" placeholder="name" />
+
+    <select type="text" id="type" placeholder="type">
+      <option id="fruit" value="fruits">&#127822 Fruit</option>
+      <option id="vegetable" value="veggies">&#129365 Vegetable </option>
+      <option id="spice" value="spices">&#129474 Spice</option>
+      <option id="meat" value="meat">&#129385 Meat</option>
+    </select>
+
+    <input type="number" id="amount" placeholder="amount" />
+
+    <div>
+      <button onclick="addIngredient()">Add Ingredient</button>
+      <br />
+      <button onclick="showPantry()">Show Pantry</button>
+      <div id="pantry-list"></div>
+    </div>
+  </div>
+</body>
+
 </html>
