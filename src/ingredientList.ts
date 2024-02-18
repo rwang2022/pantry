@@ -54,17 +54,21 @@ class ingredientList {
     }
 }
 
-const ingredient1: string = (document.getElementById("name") as HTMLInputElement).value;
-const amountAdd: number = parseInt((document.getElementById("amount") as HTMLInputElement).value);
-
-let pantry1: ingredientList = new ingredientList({"a": 1, "b": 2});
+let pantry1: ingredientList = new ingredientList({ "a": 1, "b": 2 });
 
 let recipes1: ingredientList[];
-recipes1.push(new ingredientList({"a": 1, "b": 2}));
-recipes1.push(new ingredientList({"b": 1, "c": 2}));
+recipes1.push(new ingredientList({ "a": 1, "b": 2 }));
+recipes1.push(new ingredientList({ "b": 1, "c": 2 }));
 
 function showPantry() {
     displayIngredientList(pantry1);
+}
+
+function addIngredientToPantry() {
+    const ingredient1: string = (document.getElementById("name") as HTMLInputElement).value;
+    const amountAdd: number = parseInt((document.getElementById("amount") as HTMLInputElement).value);
+    pantry1.addIngredient(ingredient1, amountAdd);
+    showPantry();
 }
 
 function displayRecipes() {
@@ -78,17 +82,13 @@ function displayRecipes() {
 // Function to display recipe in HTML
 function displayIngredientList(ingredientList: ingredientList) {
     var listHTML = '<table><thead><th>Name</th><th>Amount</th></thead><tbody>';
-    for (var category in ingredientList) {
-        for (var ingredient in ingredientList[category]) {
-            var amount = ingredientList[category][ingredient].amount;
-            listHTML += `
+    Object.entries(ingredientList.ingredients).forEach(([ingredient, amount]) => {
+        listHTML += `
             <tr class="ingredient">
                 <th class="ingredient">${ingredient}</th>
                 <th class="amount">${amount}</th>
-            </tr>
-        `;
-        }
-    }
+            </tr>`;
+    })
     listHTML += '</tbody></table>';
 
     (document.getElementById('pantry-list') as HTMLElement).innerHTML = "";

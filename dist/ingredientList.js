@@ -55,14 +55,18 @@ var ingredientList = /** @class */ (function () {
     };
     return ingredientList;
 }());
-var ingredient1 = document.getElementById("name").value;
-var amountAdd = parseInt(document.getElementById("amount").value);
 var pantry1 = new ingredientList({ "a": 1, "b": 2 });
 var recipes1;
 recipes1.push(new ingredientList({ "a": 1, "b": 2 }));
 recipes1.push(new ingredientList({ "b": 1, "c": 2 }));
 function showPantry() {
     displayIngredientList(pantry1);
+}
+function addIngredientToPantry() {
+    var ingredient1 = document.getElementById("name").value;
+    var amountAdd = parseInt(document.getElementById("amount").value);
+    pantry1.addIngredient(ingredient1, amountAdd);
+    showPantry();
 }
 function displayRecipes() {
     document.getElementById("pantry-list").innerHTML = "";
@@ -74,12 +78,10 @@ function displayRecipes() {
 // Function to display recipe in HTML
 function displayIngredientList(ingredientList) {
     var listHTML = '<table><thead><th>Name</th><th>Amount</th></thead><tbody>';
-    for (var category in ingredientList) {
-        for (var ingredient in ingredientList[category]) {
-            var amount = ingredientList[category][ingredient].amount;
-            listHTML += "\n            <tr class=\"ingredient\">\n                <th class=\"ingredient\">" + ingredient + "</th>\n                <th class=\"amount\">" + amount + "</th>\n            </tr>\n        ";
-        }
-    }
+    Object.entries(ingredientList.ingredients).forEach(function (_a) {
+        var ingredient = _a[0], amount = _a[1];
+        listHTML += "\n            <tr class=\"ingredient\">\n                <th class=\"ingredient\">" + ingredient + "</th>\n                <th class=\"amount\">" + amount + "</th>\n            </tr>";
+    });
     listHTML += '</tbody></table>';
     document.getElementById('pantry-list').innerHTML = "";
     document.getElementById('pantry-list').innerHTML += listHTML;
