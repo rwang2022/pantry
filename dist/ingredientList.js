@@ -90,7 +90,7 @@ function convertToTable(ingredientList) {
         var ingredient = _a[0], amount = _a[1];
         if (ingredientList !== pantry1 && pantry1.hasIngredient(ingredient, amount)) {
             listHTML +=
-                "<tr class=\"ingredient\" style=\"background-color: coral\";>\n                    <th class=\"ingredient\">" + ingredient + "</th>\n                    <th class=\"amount\">" + amount + "</th>        \n                </tr>";
+                "<tr class=\"ingredient\" style=\"background-color: #86BA90\";>\n                    <th class=\"ingredient\">" + ingredient + "</th>\n                    <th class=\"amount\">" + amount + "</th>        \n                </tr>";
         }
         else {
             listHTML +=

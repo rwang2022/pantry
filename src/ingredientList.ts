@@ -91,7 +91,7 @@ function convertToTable(ingredientList: ingredientList) {
     Object.entries(ingredientList.ingredients).forEach(([ingredient, amount]) => {
         if (ingredientList !== pantry1 && pantry1.hasIngredient(ingredient, amount)) {
             listHTML += 
-                `<tr class="ingredient" style="background-color: coral";>
+                `<tr class="ingredient" style="background-color: #86BA90";>
                     <th class="ingredient">${ingredient}</th>
                     <th class="amount">${amount}</th>        
                 </tr>`
