@@ -87,8 +87,8 @@ function makeRecipe(recipe) {
     return true;
 }
 function addIngredient() {
-    var name = document.getElementById("name").value;
     var type = document.getElementById("type").value;
+    var name = document.getElementById("name").value;
     var amountAdd = parseInt(document.getElementById("amount").value);
     console.log(name, type, amountAdd);
     if (pantry[type][name] !== undefined) {
@@ -101,33 +101,4 @@ function addIngredient() {
         pantry[type][name] = new ingredient(amountAdd, now);
     }
     showPantry();
-}
-function showPantry() {
-    displayRecipe(pantry);
-    console.log(pantry);
-}
-function displayRecipes() {
-    document.getElementById("pantry-list").innerHTML = "";
-    for (var i = 0; i < recipes.length; i++) {
-        document.getElementById('pantry-list').innerHTML += "<h2 style=\"text-align: center\">" + recipe_names[i] + "</h2>";
-        displayRecipe(recipes[i]);
-    }
-}
-// Function to create HTML for ingredients
-function createIngredientHTML(category, ingredient, amount, dateAdded) {
-    return "\n        <tr class=\"ingredient\">\n            <th class=\"category\">" + category + "</th>\n            <th class=\"name\">" + ingredient + "</th>\n            <th class=\"amount\">" + amount + "</th>\n        </tr>\n    ";
-}
-// Function to display recipe in HTML
-function displayRecipe(recipe) {
-    var recipeHTML = '<table><thead><th>Type</th><th>Name</th><th>Amount</th></thead><tbody>';
-    for (var category in recipe) {
-        for (var ingredient in recipe[category]) {
-            var amount = recipe[category][ingredient].amount;
-            var dateAdded = recipe[category][ingredient].dateAdded;
-            recipeHTML += createIngredientHTML(category, ingredient, amount, dateAdded);
-        }
-    }
-    recipeHTML += '</tbody></table>';
-    // (document.getElementById('pantry-list') as HTMLElement).innerHTML = "";
-    document.getElementById('pantry-list').innerHTML += recipeHTML;
 }

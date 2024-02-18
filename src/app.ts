@@ -12,6 +12,7 @@ class ingredient {
     }
 }
 
+
 var pantry = {
     "spices": { "onion powder": new ingredient(2, new Date(Date.now())) },
     "fruits": { "tomato": new ingredient(1, new Date(Date.now())) },
@@ -90,8 +91,8 @@ function makeRecipe(recipe): Boolean {
 }
 
 function addIngredient() {
-    const name: string = (document.getElementById("name") as HTMLInputElement).value;
     const type: string = (document.getElementById("type") as HTMLInputElement).value;
+    const name: string = (document.getElementById("name") as HTMLInputElement).value;
     const amountAdd: number = parseInt((document.getElementById("amount") as HTMLInputElement).value);
 
     console.log(name, type, amountAdd);
@@ -109,42 +110,3 @@ function addIngredient() {
     showPantry();
 }
 
-function showPantry() {
-    displayRecipe(pantry);
-    console.log(pantry);
-}
-
-function displayRecipes() {
-    (document.getElementById("pantry-list") as HTMLElement).innerHTML = "";
-    for (let i = 0; i < recipes.length; i++) {
-        (document.getElementById('pantry-list') as HTMLElement).innerHTML += `<h2 style="text-align: center">${recipe_names[i]}</h2>`
-        displayRecipe(recipes[i]);
-    }
-}
-
-// Function to create HTML for ingredients
-function createIngredientHTML(category, ingredient, amount, dateAdded) {
-    return `
-        <tr class="ingredient">
-            <th class="category">${category}</th>
-            <th class="name">${ingredient}</th>
-            <th class="amount">${amount}</th>
-        </tr>
-    `;
-}
-
-// Function to display recipe in HTML
-function displayRecipe(recipe) {
-    var recipeHTML = '<table><thead><th>Type</th><th>Name</th><th>Amount</th></thead><tbody>';
-    for (var category in recipe) {
-        for (var ingredient in recipe[category]) {
-            var amount = recipe[category][ingredient].amount;
-            var dateAdded = recipe[category][ingredient].dateAdded;
-            recipeHTML += createIngredientHTML(category, ingredient, amount, dateAdded);
-        }
-    }
-    recipeHTML += '</tbody></table>';
-
-    // (document.getElementById('pantry-list') as HTMLElement).innerHTML = "";
-    (document.getElementById('pantry-list') as HTMLElement).innerHTML += recipeHTML;
-}

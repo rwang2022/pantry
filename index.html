@@ -7,10 +7,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pantry App</title>
-  <script src="/dist/app.js"></script>
+  <script src="/dist/ingredientList.js"></script>
 </head>
 
-<body>
+<body onload="showPantry()">
   <!--Nav Bar-->
   <nav>
     <a href="index.html">Home</a>
@@ -39,21 +39,21 @@
 
   <!--Input Ingredients-->
   <div class="align-center">
-    <input type="text" id="name" placeholder="name" />
+    <input type="text" id="name" placeholder="name" autocomplete="off"/>
 
-    <select name="food" id="type" placeholder="type">
+    <!-- <select name="food" id="type" placeholder="type">
       <option value="fruits" id="fruit">&#127822 fruit</option>
       <option value="veggies" id="vegetable">&#129365 vegetable </option>
       <option value="spices" id="spice">&#129474 spice</option>
       <option value="meat" id="meat">&#129385 meat</option>
     </select>
-    <input type="number" id="amount" placeholder="amount" />
-
-
+    <input type="number" id="amount" placeholder="amount" /> -->
+    
+    <button class="button button1" onclick="addIngredient()">Add Ingredient</button>
+    
     <div class="align-center">
 
       <br>
-      <button class="button button1" onclick="addIngredient()">Add Ingredient</button>
 
       <button class="button button1" onclick="showPantry()">Show Pantry</button>
       <div id="pantry-list"></div>
