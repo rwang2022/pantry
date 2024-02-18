@@ -15,12 +15,27 @@ var pantry = {
     "veggies": {},
     "meat": { "pork belly": new ingredient(1, new Date(Date.now())) }
 };
-var recipe1 = {
-    "spices": { "onion powder": new ingredient(3, new Date(Date.now())) },
-    "fruits": { "tomato": new ingredient(1, new Date(Date.now())) },
-    "veggies": { "green onion": new ingredient(1, new Date(Date.now())) },
-    "meat": { "pork belly": new ingredient(1, new Date(Date.now())) }
-};
+var recipe_names = ["Recipe #1", "Recipe #2", "Recipe #3"];
+var recipes = [
+    {
+        "spices": { "onion powder": new ingredient(3, new Date(Date.now())) },
+        "fruits": { "tomato": new ingredient(1, new Date(Date.now())) },
+        "veggies": { "green onion": new ingredient(1, new Date(Date.now())) },
+        "meat": { "pork belly": new ingredient(1, new Date(Date.now())) }
+    },
+    {
+        "spices": { "onion powder": new ingredient(3, new Date(Date.now())) },
+        "fruits": { "tomato": new ingredient(1, new Date(Date.now())) },
+        "veggies": { "green onion": new ingredient(1, new Date(Date.now())) },
+        "meat": { "pork belly": new ingredient(1, new Date(Date.now())) }
+    },
+    {
+        "spices": { "onion powder": new ingredient(3, new Date(Date.now())) },
+        "fruits": { "tomato": new ingredient(1, new Date(Date.now())) },
+        "veggies": { "green onion": new ingredient(1, new Date(Date.now())) },
+        "meat": { "pork belly": new ingredient(1, new Date(Date.now())) }
+    },
+];
 function haveIngredients(recipe) {
     var good = true;
     var needed = {
@@ -29,7 +44,7 @@ function haveIngredients(recipe) {
         "veggies": {},
         "meat": {}
     };
-    for (var _i = 0, _a = Object.entries(recipe1); _i < _a.length; _i++) {
+    for (var _i = 0, _a = Object.entries(recipes[0]); _i < _a.length; _i++) {
         var _b = _a[_i], type = _b[0], ingredientGroup = _b[1];
         for (var _c = 0, _d = Object.entries(ingredientGroup); _c < _d.length; _c++) {
             var _e = _d[_c], ingredientName = _e[0], ingredient_1 = _e[1];
@@ -62,7 +77,7 @@ function makeRecipe(recipe) {
     var haveAllIngredients = Object.keys(haveIngredients(recipe)).length === 0;
     if (!haveAllIngredients)
         return false;
-    for (var _i = 0, _a = Object.entries(recipe1); _i < _a.length; _i++) {
+    for (var _i = 0, _a = Object.entries(recipes[0]); _i < _a.length; _i++) {
         var _b = _a[_i], type = _b[0], ingredientGroup = _b[1];
         for (var _c = 0, _d = Object.entries(ingredientGroup); _c < _d.length; _c++) {
             var _e = _d[_c], ingredientName = _e[0], ingredient_2 = _e[1];
@@ -91,13 +106,20 @@ function showPantry() {
     displayRecipe(pantry);
     console.log(pantry);
 }
+function displayRecipes() {
+    document.getElementById("pantry-list").innerHTML = "";
+    for (var i = 0; i < recipes.length; i++) {
+        document.getElementById('pantry-list').innerHTML += "<h2 style=\"text-align: center\">" + recipe_names[i] + "</h2>";
+        displayRecipe(recipes[i]);
+    }
+}
 // Function to create HTML for ingredients
 function createIngredientHTML(category, ingredient, amount, dateAdded) {
-    return "\n        <tr class=\"ingredient\">\n            <th class=\"category\">" + category + "</th>\n            <th class=\"name\">" + ingredient + "</th>\n            <th class=\"amount\">" + amount + "</th>\n            <th class=\"expiry\">" + dateAdded.toLocaleString('en-US', { timeZone: 'EST' }) + "</th>\n        </tr>\n    ";
+    return "\n        <tr class=\"ingredient\">\n            <th class=\"category\">" + category + "</th>\n            <th class=\"name\">" + ingredient + "</th>\n            <th class=\"amount\">" + amount + "</th>\n        </tr>\n    ";
 }
 // Function to display recipe in HTML
 function displayRecipe(recipe) {
-    var recipeHTML = '<table><thead><th>Type</th><th>Name</th><th>Amount</th><th>Date Added</th></thead><tbody>';
+    var recipeHTML = '<table><thead><th>Type</th><th>Name</th><th>Amount</th></thead><tbody>';
     for (var category in recipe) {
         for (var ingredient in recipe[category]) {
             var amount = recipe[category][ingredient].amount;
@@ -106,6 +128,6 @@ function displayRecipe(recipe) {
         }
     }
     recipeHTML += '</tbody></table>';
-    document.getElementById('pantry-list').innerHTML = "";
-    document.getElementById('pantry-list').innerHTML = recipeHTML;
+    // (document.getElementById('pantry-list') as HTMLElement).innerHTML = "";
+    document.getElementById('pantry-list').innerHTML += recipeHTML;
 }
