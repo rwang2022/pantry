@@ -28,7 +28,6 @@ var ingredientList = /** @class */ (function () {
             var ingredient = _a[0], quantity = _a[1];
             if (_this.ingredients[ingredient] === undefined || _this.ingredients[ingredient] < quantity) {
                 isSubset = false;
-                console.log("not subset");
                 return;
             }
         });
@@ -61,12 +60,11 @@ var ingredientList = /** @class */ (function () {
     return ingredientList;
 }());
 var pantry1 = new ingredientList({ "a": 1, "b": 2 });
-console.log(pantry1.ingredients["a"]);
 var recipes1 = [];
 recipes1.push(new ingredientList({ "a": 1, "b": 2 }));
 recipes1.push(new ingredientList({ "b": 1, "c": 2 }));
 function showPantry() {
-    displayIngredientList(pantry1);
+    document.getElementById("pantry-list").innerHTML = convertToTable(pantry1);
 }
 function addIngredientToPantry() {
     var ingredient1 = document.getElementById("name").value;
@@ -79,22 +77,18 @@ function addIngredientToPantry() {
     showPantry();
 }
 function displayRecipes() {
-    console.log(recipes1.length);
     document.getElementById("pantry-list").innerHTML = "";
     for (var i = 0; i < recipes1.length; i++) {
         document.getElementById('pantry-list').innerHTML += "<h2 style=\"text-align: center\">Recipe #" + (i + 1) + "</h2>";
-        displayIngredientList(recipes1[i]);
+        document.getElementById('pantry-list').innerHTML += convertToTable(recipes1[i]);
     }
 }
 // Function to display recipe in HTML
-function displayIngredientList(ingredientList) {
+function convertToTable(ingredientList) {
     var listHTML = '<table><thead><th>Name</th><th>Amount</th></thead><tbody>';
     Object.entries(ingredientList.ingredients).forEach(function (_a) {
         var ingredient = _a[0], amount = _a[1];
-        console.log(ingredient, amount);
-        console.log(pantry1.ingredients[ingredient]);
         if (ingredientList !== pantry1 && pantry1.hasIngredient(ingredient, amount)) {
-            console.log("pantry has ingredient!");
             listHTML +=
                 "<tr class=\"ingredient\" style=\"background-color: coral\";>\n                    <th class=\"ingredient\">" + ingredient + "</th>\n                    <th class=\"amount\">" + amount + "</th>        \n                </tr>";
         }
@@ -104,5 +98,5 @@ function displayIngredientList(ingredientList) {
         }
     });
     listHTML += '</tbody></table>';
-    document.getElementById('pantry-list').innerHTML += listHTML;
+    return listHTML;
 }

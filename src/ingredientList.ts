@@ -27,7 +27,6 @@ class ingredientList {
         Object.entries(other.ingredients).forEach(([ingredient, quantity]) => {
             if (this.ingredients[ingredient] === undefined || this.ingredients[ingredient] < quantity) {
                 isSubset = false;
-                console.log("not subset");
                 return;
             }
         })
@@ -60,14 +59,13 @@ class ingredientList {
 }
 
 let pantry1: ingredientList = new ingredientList({ "a": 1, "b": 2 });
-console.log(pantry1.ingredients["a"]);
 
 let recipes1: ingredientList[] = [];
 recipes1.push(new ingredientList({ "a": 1, "b": 2 }));
 recipes1.push(new ingredientList({ "b": 1, "c": 2 }));
 
 function showPantry() {
-    displayIngredientList(pantry1);
+    (document.getElementById("pantry-list") as HTMLElement).innerHTML = convertToTable(pantry1);
 }
 
 function addIngredientToPantry() {
@@ -80,22 +78,18 @@ function addIngredientToPantry() {
 }
 
 function displayRecipes() {
-    console.log(recipes1.length);
     (document.getElementById("pantry-list") as HTMLElement).innerHTML = "";
     for (let i = 0; i < recipes1.length; i++) {
-        (document.getElementById('pantry-list') as HTMLElement).innerHTML += `<h2 style="text-align: center">Recipe #${i + 1}</h2>`
-        displayIngredientList(recipes1[i]);
+        (document.getElementById('pantry-list') as HTMLElement).innerHTML += `<h2 style="text-align: center">Recipe #${i + 1}</h2>`;
+        (document.getElementById('pantry-list') as HTMLElement).innerHTML += convertToTable(recipes1[i]);
     }
 }
 
 // Function to display recipe in HTML
-function displayIngredientList(ingredientList: ingredientList) {
+function convertToTable(ingredientList: ingredientList) {
     var listHTML = '<table><thead><th>Name</th><th>Amount</th></thead><tbody>';
     Object.entries(ingredientList.ingredients).forEach(([ingredient, amount]) => {
-        console.log(ingredient, amount);
-        console.log(pantry1.ingredients[ingredient]);
         if (ingredientList !== pantry1 && pantry1.hasIngredient(ingredient, amount)) {
-            console.log("pantry has ingredient!");
             listHTML += 
                 `<tr class="ingredient" style="background-color: coral";>
                     <th class="ingredient">${ingredient}</th>
@@ -111,6 +105,5 @@ function displayIngredientList(ingredientList: ingredientList) {
         }
     })
     listHTML += '</tbody></table>';
-
-    (document.getElementById('pantry-list') as HTMLElement).innerHTML += listHTML;
+    return listHTML;
 }
