@@ -1,7 +1,7 @@
 class ingredient {
-    amount: number = 0; 
+    amount: number = 0;
     dateAdded: Date;
-    
+
     constructor(amount: number, dateAdded: Date) {
         this.amount = amount;
         this.dateAdded = dateAdded;
@@ -13,34 +13,65 @@ class ingredient {
 }
 
 var pantry = {
-    "spices": {},
-    "fruits": {"tomato": new ingredient(1, new Date(Date.now()))},
+    "spices": { "onion powder": new ingredient(2, new Date(Date.now())) },
+    "fruits": { "tomato": new ingredient(1, new Date(Date.now())) },
     "veggies": {},
-    "meat": {}
+    "meat": { "pork belly": new ingredient(1, new Date(Date.now())) }
 };
 
 var recipe1 = {
-    "spices": {"onion powder": new ingredient(1, new Date(Date.now()))},
-    "fruits": {"tomato": new ingredient(1, new Date(Date.now()))},
-    "veggies": {"green onion": new ingredient(1, new Date(Date.now()))},
-    "meat": {"pork belly": new ingredient(1, new Date(Date.now()))},
+    "spices": { "onion powder": new ingredient(3, new Date(Date.now())) },
+    "fruits": { "tomato": new ingredient(1, new Date(Date.now())) },
+    "veggies": { "green onion": new ingredient(1, new Date(Date.now())) },
+    "meat": { "pork belly": new ingredient(1, new Date(Date.now())) },
 }
 
-function haveIngredients(recipe): Boolean {
+function haveIngredients(recipe) {
     let good: boolean = true;
-    
+    var needed = {
+        "spices": {},
+        "fruits": {},
+        "veggies": {},
+        "meat": {}
+    };
+
     for (const [type, ingredientGroup] of Object.entries(recipe1)) {
         for (const [ingredientName, ingredient] of Object.entries(ingredientGroup)) {
             const pantryIngredient = pantry[type][ingredientName];
             // console.log(pantryIngredient);
-            if (pantryIngredient === undefined || pantryIngredient.amount < ingredient.amount) {
+            if (pantryIngredient === undefined) {
                 good = false;
                 console.log("you don't enough " + ingredientName + " (need " + ingredient.amount + ")");
+                if (needed[type] === undefined) needed[type] = ingredientName;
+                if (needed[type][ingredientName] === undefined) needed[type][ingredientName] = ingredient;
+            }
+            else if (pantryIngredient.amount < ingredient.amount) {
+                good = false;
+                const diff: number = ingredient.amount - pantryIngredient.amount;
+                console.log("you don't enough " + ingredientName + " (need " + diff + ")");
+                if (needed[type] === undefined) needed[type] = ingredientName;
+                if (needed[type][ingredientName] === undefined) {
+                    needed[type][ingredientName] = ingredient;
+                    needed[type][ingredientName].amount = diff;
+                }
             }
         }
     }
+
+    return needed;
+}
+
+function makeRecipe(recipe): Boolean {
+    const haveAllIngredients: boolean = Object.keys(haveIngredients(recipe)).length === 0;
+    if (!haveAllIngredients) return false; 
+
+    for (const [type, ingredientGroup] of Object.entries(recipe1)){
+        for (const [ingredientName, ingredient] of Object.entries(ingredientGroup)) {
+            pantry[type][ingredientName].amount -= ingredient.amount;
+        }
+    }
     
-    return good;
+    return true;
 }
 
 function addIngredient() {
@@ -69,7 +100,7 @@ function createIngredientHTML(category, ingredient, amount, dateAdded) {
             <th class="category">${category}</th>
             <th class="name">${ingredient}</th>
             <th class="amount">${amount}</th>
-            <th class="expiry">${dateAdded.toLocaleString('en-US', {timeZone: 'EST'})}</th>
+            <th class="expiry">${dateAdded.toLocaleString('en-US', { timeZone: 'EST' })}</th>
         </tr>
     `;
 }
